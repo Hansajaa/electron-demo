@@ -30,7 +30,7 @@ function WeatherCard(props) {
   const apiKey = "ff4b41be54077fc82ce47fc4894362a7";
 
   useEffect(()=>{
-    console.log(city);
+    
   },[city])
 
   return (
