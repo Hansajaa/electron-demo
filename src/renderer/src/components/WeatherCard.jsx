@@ -1,37 +1,39 @@
 import './WeatherCard.css'
 import image from '../assets/weather_icons/03d.png'
 import locationImage from '../assets/location-icon.png'
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
-import icon01d from '../assets/weather_icons/01d.png'
-import icon01n from '../assets/weather_icons/01n.png'
-import icon02d from '../assets/weather_icons/02d.png'
-import icon02n from '../assets/weather_icons/02n.png'
-import icon03d from '../assets/weather_icons/03d.png'
-import icon03n from '../assets/weather_icons/03n.png'
-import icon04d from '../assets/weather_icons/04d.png'
-import icon04n from '../assets/weather_icons/04n.png'
-import icon09d from '../assets/weather_icons/09d.png'
-import icon09n from '../assets/weather_icons/09n.png'
-import icon10d from '../assets/weather_icons/10d.png'
-import icon10n from '../assets/weather_icons/10n.png'
-import icon11d from '../assets/weather_icons/11d.png'
-import icon11n from '../assets/weather_icons/11n.png'
-import icon13d from '../assets/weather_icons/13d.png'
-import icon13n from '../assets/weather_icons/13n.png'
-import icon50d from '../assets/weather_icons/50d.png'
-import icon50n from '../assets/weather_icons/50n.png'
+import { useForm } from 'react-hook-form'
+// import icon01d from '../assets/weather_icons/01d.png'
+// import icon01n from '../assets/weather_icons/01n.png'
+// import icon02d from '../assets/weather_icons/02d.png'
+// import icon02n from '../assets/weather_icons/02n.png'
+// import icon03d from '../assets/weather_icons/03d.png'
+// import icon03n from '../assets/weather_icons/03n.png'
+// import icon04d from '../assets/weather_icons/04d.png'
+// import icon04n from '../assets/weather_icons/04n.png'
+// import icon09d from '../assets/weather_icons/09d.png'
+// import icon09n from '../assets/weather_icons/09n.png'
+// import icon10d from '../assets/weather_icons/10d.png'
+// import icon10n from '../assets/weather_icons/10n.png'
+// import icon11d from '../assets/weather_icons/11d.png'
+// import icon11n from '../assets/weather_icons/11n.png'
+// import icon13d from '../assets/weather_icons/13d.png'
+// import icon13n from '../assets/weather_icons/13n.png'
+// import icon50d from '../assets/weather_icons/50d.png'
+// import icon50n from '../assets/weather_icons/50n.png'
 
 function WeatherCard(props) {
   const [city, setCity] = useState('Colombo')
 
-  const [data,setData] = useState();
+  const {register,handleSubmit} = useForm();
 
-  const apiKey = "ff4b41be54077fc82ce47fc4894362a7";
+  const onSubmit = (data) => {
+    setCity(data.search);
+  }
 
-  useEffect(()=>{
-    
-  },[city])
+  const apiKey = 'ff4b41be54077fc82ce47fc4894362a7';
+
 
   return (
     <div>
@@ -60,15 +62,15 @@ function WeatherCard(props) {
             </svg>
           </div>
           <input
+            {...register("search")}
             type="search"
-            id="search"
             class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Search city..."
             required
           />
           <button
             type="submit"
-            onClick={()=>{setCity(document.getElementById("search").value)}}
+            onClick={handleSubmit(onSubmit)}
             class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Search
@@ -101,8 +103,8 @@ function WeatherCard(props) {
           <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
             <div className="flex flex-col mx-5 my-8 mb-5">
               <div className="flex">
-                <img src={locationImage} alt="" /> 
-                <p className="mx-4">{city}, LK</p>
+                <img src={locationImage} alt="" />
+                <p className="mx-4">{city}</p>
               </div>
             </div>
           </p>
